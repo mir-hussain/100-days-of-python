@@ -6,4 +6,3 @@ In this exercise you have to take user input mentioned below.
 - Name of his/her pet.
 
 After that you have to concat two words to generate a single word as band name.
-
