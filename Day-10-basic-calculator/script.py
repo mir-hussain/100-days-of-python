@@ -24,15 +24,30 @@ operators = {
     "/": div
 }
 
-first_number = int(input("Enter first number: "))
 
-for operator in operators:
-    print(operator)
-option = input("Pick a operation from above: ")
-second_number = int(input("Enter second number: "))
+def calculator():
 
-calculation_function = operators[option]
+    first_number = int(input("Enter first number: "))
 
-result = calculation_function(first_number, second_number)
+    for operator in operators:
+        print(operator)
 
-print(result)
+    should_continue = True
+    while should_continue:
+        option = input("Pick a operation from above: ")
+        second_number = int(input("Enter second number: "))
+
+        calculation_function = operators[option]
+
+        result = calculation_function(first_number, second_number)
+
+        print(f"{first_number} {option} {second_number} = {result}")
+
+        if input(f"To continue with {result} type 'y', to start a new calculation type 'n': ") == "y":
+            first_number = result
+        else:
+            should_continue = False
+            calculator()
+
+
+calculator()
