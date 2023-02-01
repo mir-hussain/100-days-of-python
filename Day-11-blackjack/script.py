@@ -25,19 +25,7 @@ def display_result(user_cards, user_score, computer_cards, computer_score, winne
 
 
 def check_result(user_score, user_cards, computer_score, computer_cards):
-    if user_score > 21 and computer_score < 21:
-        display_result(computer_score=computer_score,
-                       computer_cards=computer_cards,
-                       user_cards=user_cards,
-                       user_score=user_score,
-                       winner="Computer")
-    elif user_score < 21 and computer_score > 21:
-        display_result(computer_score=computer_score,
-                       computer_cards=computer_cards,
-                       user_cards=user_cards,
-                       user_score=user_score,
-                       winner="User")
-    elif user_score == computer_score:
+    if user_score == computer_score:
         display_result(computer_score=computer_score,
                        computer_cards=computer_cards,
                        user_cards=user_cards,
@@ -72,9 +60,22 @@ print(
 
 print(f"Computer's first card is {computer_cards[0]}")
 
-if input("Do you want to draw another card? Type 'y' or 'n': ") == "n":
-    check_result(user_score, user_cards, computer_score, computer_cards)
+if user_score > 21 and computer_score < 21:
+    display_result(computer_score=computer_score,
+                   computer_cards=computer_cards,
+                   user_cards=user_cards,
+                   user_score=user_score,
+                   winner="Computer")
+elif user_score < 21 and computer_score > 21:
+    display_result(computer_score=computer_score,
+                   computer_cards=computer_cards,
+                   user_cards=user_cards,
+                   user_score=user_score,
+                   winner="User")
 else:
-    user_cards.append(deal_card())
-    user_score, user_distance = calculate_card(user_cards)
-    check_result(user_score, user_cards, computer_score, computer_cards)
+    if input("Do you want to draw another card? Type 'y' or 'n': ") == "n":
+        check_result(user_score, user_cards, computer_score, computer_cards)
+    else:
+        user_cards.append(deal_card())
+        user_score, user_distance = calculate_card(user_cards)
+        check_result(user_score, user_cards, computer_score, computer_cards)
