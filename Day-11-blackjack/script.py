@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-print("Welcome to Black jack")
-if input("Type 'y' to play, type 'n' to exit.") == "y":
-    print("Game logic")
-else:
-    pass
-=======
 import random
 import os
 print("Blackjack")
@@ -96,4 +89,3 @@ def play_game():
 while input("Do you wanna play a game of blackjack? type 'y' or 'n': ") == 'y':
     os.system("clear")
     play_game()
->>>>>>> 0c45f9cb54589089435902af5d30678dad40f0a2
