@@ -6,6 +6,13 @@
 # TODO  : Process Coin.
 # NOTE  : quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
 
+from prettytable import PrettyTable
+
+
+table = PrettyTable()
+table.field_names = ["Water (ml)", "Milk (ml)", "Coffee (gm)"]
+
+
 MENU = {
     "espresso": {
         "ingredients": {
@@ -37,3 +44,16 @@ resources = {
     "milk": 200,
     "coffee": 100,
 }
+
+
+choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
+
+if (choice == "espresso" or choice == "latte" or choice == "cappuccino"):
+    pass
+elif (choice == "report"):
+    table.add_row(list(resources.values()))
+    print(table)
+elif (choice == "off"):
+    pass
+else:
+    print("Invalid choice")
