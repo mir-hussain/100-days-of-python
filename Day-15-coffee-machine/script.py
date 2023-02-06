@@ -8,11 +8,6 @@
 
 from prettytable import PrettyTable
 
-
-table = PrettyTable()
-table.field_names = ["Water (ml)", "Milk (ml)", "Coffee (gm)"]
-
-
 MENU = {
     "espresso": {
         "ingredients": {
@@ -45,14 +40,22 @@ resources = {
     "coffee": 100,
 }
 
+resources_table = PrettyTable()
+resources_table.field_names = ["Water (ml)", "Milk (ml)", "Coffee (gm)"]
 
-choice = input("What would you like? (espresso/latte/cappuccino): ").lower()
+menu_table = PrettyTable()
+menu_table.field_names = list(MENU.keys())
+menu_table.add_row(["$1.5", "$2.5", "$3.0"])
+
+
+choice = input(
+    f"What would you like? \n{menu_table} \nespresso/latte/cappuccino : ").lower()
 
 if (choice == "espresso" or choice == "latte" or choice == "cappuccino"):
     pass
 elif (choice == "report"):
-    table.add_row(list(resources.values()))
-    print(table)
+    resources_table.add_row(list(resources.values()))
+    print(resources_table)
 elif (choice == "off"):
     pass
 else:
