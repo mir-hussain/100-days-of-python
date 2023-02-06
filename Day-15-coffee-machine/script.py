@@ -52,6 +52,32 @@ choice = input(
     f"What would you like? \n{menu_table} \nespresso/latte/cappuccino : ").lower()
 
 if (choice == "espresso" or choice == "latte" or choice == "cappuccino"):
+
+    coins = {
+        'quarters': 0,
+        'dimes': 0,
+        'nickles': 0,
+        'pennies': 0,
+    }
+    amount_list = []
+
+    for coin in coins:
+        coins[coin] = int(input(f"How many {coin}: "))
+
+    # NOTE  : quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
+
+    for coin in coins:
+        if coin == "quarters":
+            amount_list.append(coins[coin] * 0.25)
+        elif coin == "dimes":
+            amount_list.append(coins[coin] * 0.10)
+        elif coin == "nickles":
+            amount_list.append(coins[coin] * 0.05)
+        else:
+            amount_list.append(coins[coin] * 0.01)
+
+    print(f"Total amount ${sum(amount_list)}")
+
     pass
 elif (choice == "report"):
     resources_table.add_row(list(resources.values()))
