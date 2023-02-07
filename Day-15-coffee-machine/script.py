@@ -8,6 +8,9 @@
 # NOTE  : If money is not sufficient - Sorry that's not enough money. Money refunded.
 
 from prettytable import PrettyTable
+from colorama import init, Fore
+
+init()
 
 MENU = {
     "espresso": {
@@ -44,10 +47,45 @@ resources = {
 
 resources_table = PrettyTable()
 resources_table.field_names = ["Water (ml)", "Milk (ml)", "Coffee (gm)"]
+resources_table.add_row(list(resources.values()))
 
 menu_table = PrettyTable()
 menu_table.field_names = list(MENU.keys())
 menu_table.add_row(["$1.5", "$2.5", "$3.0"])
+
+
+def get_coins():
+    coins = {
+        'quarters': 0,
+        'dimes': 0,
+        'nickles': 0,
+        'pennies': 0,
+    }
+    amount_list = []
+
+    for coin in coins:
+        coins[coin] = int(input(f"How many {coin}: "))
+
+    for coin in coins:
+        if coin == "quarters":
+            amount_list.append(coins[coin] * 0.25)
+        elif coin == "dimes":
+            amount_list.append(coins[coin] * 0.10)
+        elif coin == "nickles":
+            amount_list.append(coins[coin] * 0.05)
+        else:
+            amount_list.append(coins[coin] * 0.01)
+
+    return sum(amount_list)
+
+
+def check_resources(choice):
+    ingredients = MENU[choice]["ingredients"]
+    for item in ingredients:
+        if resources[item] < ingredients[item] or 0:
+            return True
+
+    return False
 
 
 should_run = True
@@ -60,52 +98,27 @@ while should_run:
 
     if (choice == "espresso" or choice == "latte" or choice == "cappuccino"):
 
-        print(resources)
-
-        coins = {
-            'quarters': 0,
-            'dimes': 0,
-            'nickles': 0,
-            'pennies': 0,
-        }
-        amount_list = []
-
-        for coin in coins:
-            coins[coin] = int(input(f"How many {coin}: "))
-
-        # NOTE  : quarters = $0.25, dimes = $0.10, nickles = $0.05, pennies = $0.01
-
-        for coin in coins:
-            if coin == "quarters":
-                amount_list.append(coins[coin] * 0.25)
-            elif coin == "dimes":
-                amount_list.append(coins[coin] * 0.10)
-            elif coin == "nickles":
-                amount_list.append(coins[coin] * 0.05)
-            else:
-                amount_list.append(coins[coin] * 0.01)
-
-        total_amount = sum(amount_list)
-
-        if total_amount < MENU[choice]['cost']:
-            print("Sorry that's not enough money. Money refunded.")
+        if check_resources(choice):
+            print("Sorry, not enough resources. Try something else.")
         else:
-            change = total_amount - MENU[choice]['cost']
-            resources['water'] = resources['water'] - \
-                MENU[choice]["ingredients"]["water"] or 0
-            resources['milk'] = resources['milk'] - \
-                MENU[choice]["ingredients"]["milk"] or 0
-            resources['coffee'] = resources['coffee'] - \
-                MENU[choice]["ingredients"]["coffee"] or 0
+            total_amount = get_coins()
 
-            print(resources)
+            if total_amount < MENU[choice]['cost']:
+                print(Fore.RED + "Sorry that's not enough money. Money refunded.")
+            else:
+                change = total_amount - MENU[choice]['cost']
 
-            print(f"Here is ${round(change, 2)} in change.")
-            print(f"Your {choice} is ready.")
+                for item in MENU[choice]["ingredients"]:
+                    resources[item] -= MENU[choice]["ingredients"][item]
+
+                print(resources)
+
+                print(f"Here is ${round(change, 2)} in change.")
+                print(f"Your {choice} is ready.")
+                resources_table.add_row(list(resources.values()))
 
     elif (choice == "report"):
-        resources_table.add_row(list(resources.values()))
-        print(resources_table)
+        print(Fore.GREEN + resources_table)
     elif (choice == "off"):
         should_run = False
     else:
