@@ -52,6 +52,7 @@ choice = input(
     f"What would you like? \n{menu_table} \nespresso/latte/cappuccino : ").lower()
 
 if (choice == "espresso" or choice == "latte" or choice == "cappuccino"):
+    print(MENU[choice])
 
     coins = {
         'quarters': 0,
