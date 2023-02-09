@@ -20,7 +20,7 @@ turtle.colormode(255)
 
 pen = turtle.Turtle()
 screen = turtle.Screen()
-screen.setup(800, 800)
+screen.setup(750, 750)
 
 pen.hideturtle()
 
@@ -40,7 +40,7 @@ def draw_dotted_line(dot_count):
         pen.dot(20, random.choice(color_list))
 
 
-set_pen_position(-300, -300)
+set_pen_position(-250, -250)
 
 color_list = [(186, 99, 30), (252, 46, 98), (27, 149, 50), (8, 183, 226), (22, 189, 116), (230, 167, 4), (251, 225, 54),
               (252, 57, 31), (117, 95, 193), (167, 57, 98), (1, 66, 139), (28, 134, 199), (249, 232, 238), (195, 146, 219)]
@@ -48,7 +48,7 @@ color_list = [(186, 99, 30), (252, 46, 98), (27, 149, 50), (8, 183, 226), (22, 1
 
 for i in range(1, 11):
     draw_dotted_line(10)
-    set_pen_position(-300, -300 + (i * 50))
+    set_pen_position(-250, -250 + (i * 50))
 
 pen.hideturtle()
 
