@@ -20,7 +20,7 @@ turtle.colormode(255)
 
 pen = turtle.Turtle()
 screen = turtle.Screen()
-screen.setup(750, 750)
+screen.setup(750, 700)
 
 pen.hideturtle()
 
