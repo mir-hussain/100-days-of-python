@@ -23,7 +23,17 @@ if bet:
 
 while is_race_on:
     for turtle in all_turtle:
+        if turtle.xcor() > 230:
+            is_race_on = False
+            winner = turtle.pencolor()
+
+            if winner == bet.lower():
+                print("You've won!!!")
+            else:
+                print("You've lost!!!")
+
         speed = randint(0, 30)
         turtle.forward(speed)
+
 
 screen.exitonclick()
