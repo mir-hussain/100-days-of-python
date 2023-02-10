@@ -12,8 +12,10 @@ class Paddle(Turtle):
 
     def paddle_up(self):
         y = self.ycor() + 20
-        self.goto(self.xcor(), y)
+        if self.ycor() < 240:
+            self.goto(self.xcor(), y)
 
     def paddle_down(self):
         y = self.ycor() - 20
-        self.goto(self.xcor(), y)
+        if self.ycor() > -240:
+            self.goto(self.xcor(), y)
