@@ -1,5 +1,8 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
+from ball import Ball
+import time
+
 screen = Screen()
 screen.setup(width=800, height=600)
 screen.bgcolor('black')
@@ -10,24 +13,7 @@ screen.tracer(0)
 
 paddle_right = Paddle(350)
 paddle_left = Paddle(-350)
-
-
-# paddle = Turtle()
-# paddle.color("white")
-# paddle.shape('square')
-# paddle.shapesize(stretch_wid=5, stretch_len=1)
-# paddle.penup()
-# paddle.goto(350, 0)
-
-
-# def paddle_up():
-#     y = paddle_right.ycor() + 20
-#     paddle_right.goto(paddle_right.xcor(), y)
-
-
-# def paddle_down():
-#     y = paddle_right.ycor() - 20
-#     paddle_right.goto(paddle_right.xcor(), y)
+ball = Ball()
 
 
 screen.onkey(paddle_right.paddle_up, "Up")
@@ -39,5 +25,9 @@ game_on = True
 
 while game_on:
     screen.update()
+    ball.move()
+
+    if ball.ycor() > 280 or ball.ycor() < -280:
+        ball.bounce()
 
 screen.exitonclick()
