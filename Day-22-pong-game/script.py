@@ -24,6 +24,7 @@ screen.onkey(paddle_left.paddle_down, "s")
 game_on = True
 
 while game_on:
+    time.sleep(0.1)
     screen.update()
     ball.move()
 
@@ -31,6 +32,14 @@ while game_on:
         ball.bounce_y()
 
     if ball.distance(paddle_right) < 50 and ball.xcor() > 325 or ball.distance(paddle_left) < 50 and ball.xcor() < -325:
+        ball.bounce_x()
+
+    if ball.xcor() > 390:
+        ball.ball_reset()
+        ball.bounce_x()
+
+    if ball.xcor() < -390:
+        ball.ball_reset()
         ball.bounce_x()
 
 screen.exitonclick()

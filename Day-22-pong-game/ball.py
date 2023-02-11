@@ -7,8 +7,8 @@ class Ball(Turtle):
         self.shape("circle")
         self.color("white")
         self.penup()
-        self.x_movement = 0.05
-        self.y_movement = 0.05
+        self.x_movement = 10
+        self.y_movement = 10
 
     def move(self):
         x = self.xcor() + self.x_movement
@@ -20,3 +20,6 @@ class Ball(Turtle):
 
     def bounce_x(self):
         self.x_movement *= -1
+
+    def ball_reset(self):
+        self.home()
