@@ -20,6 +20,7 @@ while game_on:
 
     if turtle.ycor() > 190:
         turtle.set_to_start()
+        level.update()
 
 
 screen.exitonclick()

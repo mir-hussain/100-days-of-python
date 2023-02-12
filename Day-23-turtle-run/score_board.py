@@ -12,3 +12,8 @@ class Level(Turtle):
         self.hideturtle()
         self.level = 1
         self.write(f"Level: {self.level}", font=FONT)
+
+    def update(self):
+        self.clear()
+        self.level += 1
+        self.write(f"Level: {self.level}", font=FONT)
