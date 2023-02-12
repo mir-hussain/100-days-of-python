@@ -23,7 +23,7 @@ list = ["red", "green", "blue"]
 for _ in range(0, 25):
 
     random_x = randint(-280, 280)
-    random_y = randint(-180, 180)
+    random_y = randint(-170, 180)
     block = Block((random_x, random_y), list[randint(0, 2)])
     blocks.append(block)
 
@@ -38,6 +38,9 @@ while game_on:
     for block in blocks:
         if block.xcor() < -310:
             block.goto(310, block.ycor())
+
+        if block.ycor() + 5 < turtle.ycor() and block.distance(turtle) < 10:
+            turtle.set_to_start()
 
         block.movement()
 

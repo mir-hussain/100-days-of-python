@@ -15,6 +15,3 @@ class Block(Turtle):
     def movement(self):
         x = self.xcor() - MOVEMENT
         self.goto(x, self.ycor())
-
-    def reset_position(self):
-        pass
