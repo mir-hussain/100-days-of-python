@@ -1,5 +1,6 @@
 from turtle import Screen
 from subject import MyTurtle
+from score_board import Level
 
 screen = Screen()
 screen.setup(height=400, width=600)
@@ -7,6 +8,8 @@ screen.listen()
 screen.tracer(0)
 
 turtle = MyTurtle()
+
+level = Level()
 
 screen.onkey(turtle.move_up, "Up")
 screen.onkey(turtle.move_down, "Down")
