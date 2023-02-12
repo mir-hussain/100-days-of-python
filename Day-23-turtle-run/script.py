@@ -15,16 +15,10 @@ blocks = []
 turtle = MyTurtle()
 level = Level()
 
-# block = Block((90, 150))
-# block.movement()
-
 list = ["red", "green", "blue"]
 
 for _ in range(0, 10):
-
-    random_x = randint(-280, 280)
-    random_y = randint(-120, 180)
-    block = Block((random_x, random_y), list[randint(0, 2)])
+    block = Block(list[randint(0, 2)])
     blocks.append(block)
 
 
@@ -38,7 +32,8 @@ while game_on:
 
     for block in blocks:
         if block.xcor() < -310:
-            block.goto(310, block.ycor())
+            random_y = randint(-120, 180)
+            block.goto(310, random_y)
 
         if block.distance(turtle) < 20:
             game_on = False
