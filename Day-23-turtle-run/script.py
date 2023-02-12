@@ -31,6 +31,7 @@ for _ in range(0, 10):
 screen.onkey(turtle.move_up, "Up")
 screen.onkey(turtle.move_down, "Down")
 
+
 game_on = True
 while game_on:
     screen.update()
@@ -40,7 +41,8 @@ while game_on:
             block.goto(310, block.ycor())
 
         if block.distance(turtle) < 20:
-            turtle.set_to_start()
+            game_on = False
+            level.game_over()
 
         block.movement()
 

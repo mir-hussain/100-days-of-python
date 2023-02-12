@@ -17,3 +17,10 @@ class Level(Turtle):
         self.clear()
         self.level += 1
         self.write(f"Level: {self.level}", font=FONT)
+
+    def game_over(self):
+        self.clear()
+        self.home()
+        self.write("Game Over", align="center", font=FONT)
+        self.goto(self.xcor(), -50)
+        self.write(f"Level: {self.level}", align="center", font=FONT)
