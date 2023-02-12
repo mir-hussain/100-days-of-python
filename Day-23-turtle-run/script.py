@@ -20,10 +20,10 @@ level = Level()
 
 list = ["red", "green", "blue"]
 
-for _ in range(0, 25):
+for _ in range(0, 10):
 
     random_x = randint(-280, 280)
-    random_y = randint(-170, 180)
+    random_y = randint(-120, 180)
     block = Block((random_x, random_y), list[randint(0, 2)])
     blocks.append(block)
 
@@ -39,7 +39,7 @@ while game_on:
         if block.xcor() < -310:
             block.goto(310, block.ycor())
 
-        if block.ycor() + 5 < turtle.ycor() and block.distance(turtle) < 10:
+        if block.distance(turtle) < 20:
             turtle.set_to_start()
 
         block.movement()

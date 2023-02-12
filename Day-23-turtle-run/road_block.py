@@ -1,6 +1,6 @@
 from turtle import Turtle
 
-MOVEMENT = 0.5
+MOVEMENT = 0.1
 
 
 class Block(Turtle):
