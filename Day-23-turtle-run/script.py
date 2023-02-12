@@ -31,6 +31,9 @@ while game_on:
     screen.update()
 
     for block in blocks:
+        if turtle.ycor() > 190:
+            block.movement_speed += 0.1
+
         if block.xcor() < -310:
             random_y = randint(-120, 180)
             block.goto(310, random_y)
