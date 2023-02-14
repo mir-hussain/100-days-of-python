@@ -21,11 +21,19 @@ while len(guess_list) <= 50:
 
     answer = screen.textinput(title="Guess the state",
                               prompt="What's another state name?").title()
+    if answer == "Exit":
+        break
 
     if answer in state_dict and answer not in guess_list:
         label = Label(answer, state_dict[answer])
         guess_list.append(answer)
         screen.title(f"{len(guess_list)}/50")
 
+missed_states = []
 
-turtle.mainloop()
+for state in state_dict:
+    if state in guess_list:
+        continue
+    missed_states.append(state)
+
+pandas.DataFrame({"State": missed_states}).to_csv("Missed.csv")
