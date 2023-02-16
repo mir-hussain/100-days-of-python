@@ -4,6 +4,13 @@ window = Tk()
 window.title("Mile to Km Converter")
 window.config(padx=50, pady=50)
 
+
+def calculate():
+    miles = int(user_input.get())
+    km = round(miles * 1.609344, 2)
+    km_number.config(text=km)
+
+
 user_input = Entry()
 user_input.grid(column=2, row=1)
 
@@ -19,7 +26,7 @@ km_number.grid(column=2, row=2)
 km_label = Label(text="Km")
 km_label.grid(column=3, row=2)
 
-calculate_button = Button(text="Calculate")
+calculate_button = Button(text="Calculate", command=calculate)
 calculate_button.grid(column=2, row=3)
 
 window.mainloop()
