@@ -20,13 +20,15 @@ LONG_BREAK_MIN = 20
 
 window = Tk()
 window.title("Pomodoro")
-window.config(padx=100, pady=100)
+window.config(padx=100, pady=100, bg=YELLOW)
 
-canvas = Canvas(width=200, height=224)
+label = Label(text="Timer", fg=GREEN)
+
+canvas = Canvas(width=200, height=224, bg=YELLOW, highlightthickness=0)
 tomato_image = PhotoImage(file="tomato.png")
-canvas.create_image(101, 112, image=tomato_image)
-canvas.create_text(101, 130, text="00:00", fill="white",
+canvas.create_image(100, 112, image=tomato_image)
+canvas.create_text(100, 130, text="00:00", fill="white",
                    font=(FONT_NAME, 35, "bold"))
-canvas.pack()
+canvas.grid(row=2, column=2)
 
 window.mainloop()
