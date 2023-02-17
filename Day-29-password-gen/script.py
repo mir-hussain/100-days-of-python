@@ -2,6 +2,16 @@ from tkinter import *
 
 BACKGROUND_COLOR = "white"
 
+
+def save_to_file():
+    web = web_input.get()
+    un = username.get()
+    pw = password.get()
+
+    with open("pass.txt", "a") as file:
+        file.write(f"{web} | {un} | {pw}\n")
+
+
 window = Tk()
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 canvas = Canvas(width=200, height=200,
@@ -25,6 +35,7 @@ username_label = Label(text="Username/Email:", bg=BACKGROUND_COLOR, pady=10)
 username_label.grid(row=3, column=1)
 
 username = Entry(width=40)
+username.insert(0, "mir.hm110@gmail.com")
 username.grid(row=3, column=2, columnspan=2)
 
 # Password
@@ -40,7 +51,7 @@ gen_button.grid(row=4, column=3)
 
 # Add
 
-add_button = Button(text="Add")
+add_button = Button(text="Add", command=save_to_file)
 add_button.grid(row=5, column=2, columnspan=2, sticky='nesw', pady=10)
 
 window.mainloop()
