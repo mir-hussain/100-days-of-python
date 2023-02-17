@@ -1,4 +1,5 @@
 from tkinter import *
+import math
 
 # ---------------------------- CONSTANTS ------------------------------- #
 PINK = "#e2979c"
@@ -36,13 +37,23 @@ canvas.grid(row=2, column=2)
 
 
 def countdown(count):
-    canvas.itemconfig(timer_text, text=count)
+
+    minute = math.floor(count / 60)
+    second = count % 60
+
+    if second < 10:
+        second = f"0{second}"
+
+    if minute < 10:
+        minute = f"0{minute}"
+
+    canvas.itemconfig(timer_text, text=f"{minute}:{second}")
     if count > 0:
         window.after(1000, countdown, count - 1)
 
 
 def start_timer():
-    countdown(5)
+    countdown(20)
 
 
 start_button = Button(text="Start", highlightthickness=0, command=start_timer)
