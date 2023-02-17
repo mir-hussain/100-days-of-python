@@ -35,7 +35,12 @@ password_label.grid(row=4, column=1)
 password = Entry(width=29)
 password.grid(row=4, column=2)
 
-gen_button = Button(text="Generate", padx=20)
+gen_button = Button(text="Generate")
 gen_button.grid(row=4, column=3)
+
+# Add
+
+add_button = Button(text="Add")
+add_button.grid(row=5, column=2, columnspan=2, sticky='nesw', pady=10)
 
 window.mainloop()
