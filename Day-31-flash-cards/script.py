@@ -18,8 +18,9 @@ def flip_card(count):
         global timer
         timer = window.after(1000, flip_card, count - 1)
     else:
-        title.config(text="English")
-        word.config(text=words["English"])
+
+        canvas.itemconfig(title, text="English")
+        canvas.itemconfig(word, text=words["English"])
 
 
 def set_random_word():
@@ -33,8 +34,8 @@ def set_random_word():
         "English": meaning
     }
 
-    title.config(text="French")
-    word.config(text=f"{random_word}")
+    canvas.itemconfig(title, text="French")
+    canvas.itemconfig(word, text=random_word)
     flip_card(3)
 
 
@@ -61,17 +62,15 @@ canvas = Canvas(width=800, height=600,
                 bg=BACKGROUND_COLOR, highlightthickness=0)
 card_front = PhotoImage(file="./images/card_front.png")
 canvas.create_image(400, 300, image=card_front)
+title = canvas.create_text(400, 150, text="Title", font=(FONT, 40, "italic"))
+word = canvas.create_text(400, 263, text="Word", font=(FONT, 60, "italic"))
+
+
 canvas.grid(row=1, column=1, columnspan=2)
 
-# Card title
 
-title = Label(text="Title", font=(FONT, 40, "italic"), bg="white")
-title.place(x=400, y=150, anchor="center")
-
-# Word
-
-word = Label(text="Word", font=(FONT, 60, "bold"), bg="white")
-word.place(x=400, y=263, anchor="center")
+# word = Label(text="Word", font=(FONT, 60, "bold"), bg="white")
+# word.place(x=400, y=263, anchor="center")
 
 
 # Cross button
