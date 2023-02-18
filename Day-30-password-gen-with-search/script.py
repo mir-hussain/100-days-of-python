@@ -11,7 +11,7 @@ def save_to_file():
     un = username_entry.get()
     pw = password_entry.get()
 
-    data = {
+    new_data = {
         web: {
             "username": un,
             "password": pw
@@ -22,9 +22,19 @@ def save_to_file():
         messagebox.showwarning(title="Empty Field",
                                message="Every filed must be filled out.")
     else:
-        with open("pass.json", "w") as file:
-            json.dump(data, file, indent=4)
 
+        try:
+            with open("pass.json", "r") as file:
+                data = json.load(file)
+        except:
+            with open("pass.json", "w") as file:
+                json.dump(new_data, file, indent=4)
+        else:
+            data.update(new_data)
+
+            with open("pass.json", "w") as file:
+                json.dump(data, file, indent=4)
+        finally:
             web_input.delete(0, END)
             password_entry.delete(0, END)
 
