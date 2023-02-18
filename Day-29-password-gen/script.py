@@ -42,7 +42,7 @@ def password_gen():
                                 )]
 
     password_character_list = password_letters_list + \
-        password_numbers_list + password_numbers_list
+        password_numbers_list + password_symbol_list
 
     random.shuffle(password_character_list)
 
