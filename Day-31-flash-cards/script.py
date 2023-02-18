@@ -1,9 +1,20 @@
+import pandas
+import random
 from tkinter import *
 from tkinter import messagebox
 
 
 BACKGROUND_COLOR = "#B1DDC6"
 FONT = "Aria"
+
+data = pandas.read_csv("./data/french_words.csv")
+word_set = {row.French: row.English for (index, row) in data.iterrows()}
+
+
+def set_random_word():
+    random_word = random.choice(list(word_set.keys()))
+    word.config(text=f"{random_word}")
+
 
 # Main Window
 window = Tk()
@@ -43,5 +54,6 @@ check_image = PhotoImage(file="./images/right.png")
 check_button = Button(image=check_image)
 check_button.grid(row=2, column=2)
 
+set_random_word()
 
 window.mainloop()
