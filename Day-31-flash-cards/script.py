@@ -3,6 +3,7 @@ from tkinter import messagebox
 
 
 BACKGROUND_COLOR = "#B1DDC6"
+FONT = "Aria"
 
 # Main Window
 window = Tk()
@@ -18,6 +19,17 @@ canvas = Canvas(width=800, height=600,
 card_front = PhotoImage(file="./images/card_front.png")
 canvas.create_image(400, 300, image=card_front)
 canvas.grid(row=1, column=1, columnspan=2)
+
+# Card title
+
+title = Label(text="Title", font=(FONT, 40, "italic"), bg="white")
+title.place(x=400, y=150, anchor="center")
+
+# Word
+
+word = Label(text="Word", font=(FONT, 60, "bold"), bg="white")
+word.place(x=400, y=263, anchor="center")
+
 
 # Cross button
 
