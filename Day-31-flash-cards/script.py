@@ -13,7 +13,25 @@ word_set = {row.French: row.English for (index, row) in data.iterrows()}
 
 def set_random_word():
     random_word = random.choice(list(word_set.keys()))
+    meaning = word_set[random_word]
+
+    words = {
+        "French": random_word,
+        "English": meaning
+    }
+
     word.config(text=f"{random_word}")
+    return words
+
+
+def handle_known_word():
+    word = set_random_word()
+    print(word)
+
+
+def handle_unknown_word():
+    word = set_random_word()
+    print(word)
 
 
 # Main Window
@@ -45,13 +63,13 @@ word.place(x=400, y=263, anchor="center")
 # Cross button
 
 cross_image = PhotoImage(file="./images/wrong.png")
-cross_button = Button(image=cross_image)
+cross_button = Button(image=cross_image, command=handle_known_word)
 cross_button.grid(row=2, column=1)
 
 # Check button
 
 check_image = PhotoImage(file="./images/right.png")
-check_button = Button(image=check_image)
+check_button = Button(image=check_image, command=handle_unknown_word)
 check_button.grid(row=2, column=2)
 
 set_random_word()
