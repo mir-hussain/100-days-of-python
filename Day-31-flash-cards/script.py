@@ -6,9 +6,17 @@ from tkinter import messagebox
 
 BACKGROUND_COLOR = "#B1DDC6"
 FONT = "Aria"
+timer = None
 
 data = pandas.read_csv("./data/french_words.csv")
 word_set = {row.French: row.English for (index, row) in data.iterrows()}
+
+
+def countdown(count):
+    if count >= 0:
+        global timer
+        print(timer)
+        timer = window.after(1000, countdown, count - 1)
 
 
 def set_random_word():
@@ -21,6 +29,7 @@ def set_random_word():
     }
 
     word.config(text=f"{random_word}")
+    countdown(3)
     return words
 
 
