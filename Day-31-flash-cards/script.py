@@ -7,19 +7,24 @@ from tkinter import messagebox
 BACKGROUND_COLOR = "#B1DDC6"
 FONT = "Aria"
 timer = None
+words = None
 
 data = pandas.read_csv("./data/french_words.csv")
 word_set = {row.French: row.English for (index, row) in data.iterrows()}
 
 
-def countdown(count):
-    if count >= 0:
+def flip_card(count):
+    if count > 0:
         global timer
-        print(timer)
-        timer = window.after(1000, countdown, count - 1)
+        timer = window.after(1000, flip_card, count - 1)
+    else:
+        title.config(text="English")
+        word.config(text=words["English"])
 
 
 def set_random_word():
+    global words
+
     random_word = random.choice(list(word_set.keys()))
     meaning = word_set[random_word]
 
@@ -28,19 +33,19 @@ def set_random_word():
         "English": meaning
     }
 
+    title.config(text="French")
     word.config(text=f"{random_word}")
-    countdown(3)
-    return words
+    flip_card(3)
 
 
 def handle_known_word():
-    word = set_random_word()
-    print(word)
+    print(words)
+    set_random_word()
 
 
 def handle_unknown_word():
-    word = set_random_word()
-    print(word)
+    print(words)
+    set_random_word()
 
 
 # Main Window
