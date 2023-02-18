@@ -67,6 +67,20 @@ def password_gen():
     password_entry.insert(0, random_password)
 
 
+def search_pass():
+
+    web = web_input.get()
+
+    if len(web) == 0:
+        messagebox.showinfo(title="Empty Input",
+                            message="Please enter a website to search.")
+    else:
+        with open("pass.json", "r") as file:
+            data = json.load(file)
+
+        print(data[web])
+
+
 window = Tk()
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 canvas = Canvas(width=200, height=200,
@@ -86,7 +100,7 @@ web_input.grid(row=2, column=2,  sticky='nesw', pady=10)
 
 # Search
 
-search_button = Button(text="Search")
+search_button = Button(text="Search", command=search_pass)
 search_button.grid(row=2, column=3,  sticky='nesw', pady=10)
 
 # Username / Email
