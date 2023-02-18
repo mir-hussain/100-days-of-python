@@ -75,10 +75,19 @@ def search_pass():
         messagebox.showinfo(title="Empty Input",
                             message="Please enter a website to search.")
     else:
-        with open("pass.json", "r") as file:
-            data = json.load(file)
-
-        print(data[web])
+        try:
+            with open("pass.json", "r") as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            messagebox.showwarning(
+                title="File missing", message="No record available")
+        else:
+            try:
+                messagebox.showinfo(
+                    title="Credentials", message=f"Username: {data[web]['username']}\nPassword:{data[web]['password']}")
+            except KeyError:
+                messagebox.showwarning(
+                    title="Invalid Website", message="A record associated with this website dose not exist")
 
 
 window = Tk()
