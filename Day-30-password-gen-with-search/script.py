@@ -78,35 +78,40 @@ canvas.grid(row=1, column=2)
 
 # Website
 
-web_label = Label(text="Website:", bg=BACKGROUND_COLOR, pady=10)
-web_label.grid(row=2, column=1)
+web_label = Label(text="Website:", bg=BACKGROUND_COLOR)
+web_label.grid(row=2, column=1,  sticky='nesw')
 
 web_input = Entry(width=40,)
-web_input.grid(row=2, column=2, columnspan=2)
+web_input.grid(row=2, column=2,  sticky='nesw', pady=10)
+
+# Search
+
+search_button = Button(text="Search")
+search_button.grid(row=2, column=3,  sticky='nesw', pady=10)
 
 # Username / Email
 
-username_label = Label(text="Username/Email:", bg=BACKGROUND_COLOR, pady=10)
-username_label.grid(row=3, column=1)
+username_label = Label(text="Username/Email:", bg=BACKGROUND_COLOR)
+username_label.grid(row=3, column=1,  sticky='nesw', pady=6)
 
 username_entry = Entry(width=40)
 username_entry.insert(0, "mir.hm110@gmail.com")
-username_entry.grid(row=3, column=2, columnspan=2)
+username_entry.grid(row=3, column=2, columnspan=2,  sticky='nesw')
 
 # Password
 
 password_label = Label(text="Password:", bg=BACKGROUND_COLOR)
-password_label.grid(row=4, column=1)
+password_label.grid(row=4, column=1,  sticky='nesw')
 
 password_entry = Entry(width=29)
-password_entry.grid(row=4, column=2)
+password_entry.grid(row=4, column=2,  sticky='nesw', pady=10)
 
 gen_button = Button(text="Generate", command=password_gen)
-gen_button.grid(row=4, column=3)
+gen_button.grid(row=4, column=3,  sticky='nesw',  pady=10)
 
 # Add
 
 add_button = Button(text="Add", command=save_to_file)
-add_button.grid(row=5, column=2, columnspan=2, sticky='nesw', pady=10)
+add_button.grid(row=5, column=2, columnspan=2, sticky='nesw')
 
 window.mainloop()
