@@ -8,6 +8,10 @@ BACKGROUND_COLOR = "#B1DDC6"
 FONT = "Aria"
 timer = None
 words = None
+words_to_learn = {
+    "French": [],
+    "English": []
+}
 
 data = pandas.read_csv("./data/french_words.csv")
 word_set = {row.French: row.English for (index, row) in data.iterrows()}
@@ -26,27 +30,38 @@ def flip_card(count):
 def set_random_word():
     global words
 
-    random_word = random.choice(list(word_set.keys()))
-    meaning = word_set[random_word]
+    if len(list(word_set.keys())) > 0:
+        random_word = random.choice(list(word_set.keys()))
+        meaning = word_set[random_word]
 
-    words = {
-        "French": random_word,
-        "English": meaning
-    }
+        words = {
+            "French": random_word,
+            "English": meaning
+        }
 
-    canvas.itemconfig(card_image, image=card_front)
-    canvas.itemconfig(title, text="French", fill="black")
-    canvas.itemconfig(word, text=random_word, fill="black")
-    flip_card(3)
+        canvas.itemconfig(card_image, image=card_front)
+        canvas.itemconfig(title, text="French", fill="black")
+        canvas.itemconfig(word, text=random_word, fill="black")
+        flip_card(3)
+    else:
+        canvas.itemconfig(card_image, image=card_front)
+        canvas.itemconfig(word, text="Cards ended", fill="black")
 
 
 def handle_known_word():
-    print(words)
+    word_set.pop(words["French"], None)
+    print(word_set)
     set_random_word()
 
 
 def handle_unknown_word():
-    print(words)
+    global words_to_learn
+
+    words_to_learn["English"].append(words["English"])
+    words_to_learn["French"].append(words["French"])
+
+    print(words_to_learn)
+
     set_random_word()
 
 
@@ -72,13 +87,13 @@ canvas.grid(row=1, column=1, columnspan=2)
 # Cross button
 
 cross_image = PhotoImage(file="./images/wrong.png")
-cross_button = Button(image=cross_image, command=handle_known_word)
+cross_button = Button(image=cross_image, command=handle_unknown_word)
 cross_button.grid(row=2, column=1)
 
 # Check button
 
 check_image = PhotoImage(file="./images/right.png")
-check_button = Button(image=check_image, command=handle_unknown_word)
+check_button = Button(image=check_image, command=handle_known_word)
 check_button.grid(row=2, column=2)
 
 set_random_word()
