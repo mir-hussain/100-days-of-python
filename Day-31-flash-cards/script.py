@@ -2,7 +2,9 @@ import pandas
 import random
 from tkinter import *
 from tkinter import messagebox
+from os.path import exists
 
+secondary_file = exists("./data/words-to-learn.csv")
 
 BACKGROUND_COLOR = "#B1DDC6"
 FONT = "Aria"
@@ -13,8 +15,12 @@ words_to_learn = {
     "English": []
 }
 
-data = pandas.read_csv("./data/french_words.csv")
-word_set = {row.French: row.English for (index, row) in data.iterrows()}
+if secondary_file:
+    data = pandas.read_csv("./data/words-to-learn.csv")
+    word_set = {row.French: row.English for (index, row) in data.iterrows()}
+else:
+    data = pandas.read_csv("./data/french_words.csv")
+    word_set = {row.French: row.English for (index, row) in data.iterrows()}
 
 
 def flip_card(count):
@@ -46,11 +52,12 @@ def set_random_word():
     else:
         canvas.itemconfig(card_image, image=card_front)
         canvas.itemconfig(word, text="Cards ended", fill="black")
+        pandas.DataFrame(words_to_learn).to_csv(
+            "./data/words-to-learn.csv", index=False)
 
 
 def handle_known_word():
     word_set.pop(words["French"], None)
-    print(word_set)
     set_random_word()
 
 
@@ -60,8 +67,7 @@ def handle_unknown_word():
     words_to_learn["English"].append(words["English"])
     words_to_learn["French"].append(words["French"])
 
-    print(words_to_learn)
-
+    word_set.pop(words["French"], None)
     set_random_word()
 
 
