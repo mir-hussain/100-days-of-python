@@ -1,6 +1,7 @@
 import smtplib
 import os
 import pandas
+import random
 import datetime as dt
 from dotenv import load_dotenv
 
@@ -19,8 +20,11 @@ email = os.getenv("email")
 #         msg="Subject: Testing ABW \n\n Ami Mir Hussain Bolchi")
 
 birthday_data = pandas.read_csv("./birthday-sheet.csv")
+birthday_list = [{**row}
+                 for _, row in birthday_data.iterrows()]
 
+print(birthday_list)
 
-with open(f"./letter_templates/letter_{1}.txt") as file:
-    letter = file.read()
-    print(letter)
+letter_number = random.randint(1, 3)
+with open(f"./letter_templates/letter_{letter_number}.txt") as file:
+    content = file.read()
