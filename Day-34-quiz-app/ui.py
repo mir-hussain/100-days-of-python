@@ -24,7 +24,7 @@ class QuizInterface():
 
         self.canvas = Canvas(width=300, height=250, highlightthickness=0)
 
-        self.question = self.canvas.create_text(150, 125, text="Test ",
+        self.question = self.canvas.create_text(150, 125, width=280, text="Test ",
                                                 anchor="center", font=("Arial", 20, "normal"))
         # self.canvas.create_rectangle(0, 0, 300, 250, fill="white")
         self.canvas.grid(row=2, column=1, columnspan=2, pady=20)
