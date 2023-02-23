@@ -54,13 +54,19 @@ class QuizInterface():
         self.canvas.itemconfig(self.question, text=q_text)
 
     def true_pressed(self):
-        print("True pressed")
+        self.give_feedback(self.quiz.check_answer("True"))
 
     def false_pressed(self):
-        print("False pressed")
+        self.give_feedback(self.quiz.check_answer("False"))
 
-    def check_answer(self, answer):
-        if answer:
-            print("True")
+    def get_next_question(self):
+        q_text = self.quiz.next_question()
+        self.canvas.itemconfig(self.question, text=q_text)
+
+    def give_feedback(self, is_right):
+        if is_right:
+            self.canvas.config(bg="green")
         else:
-            print("False")
+            self.canvas.config(bg="red")
+
+        self.window.after(1000, self.get_next_question)
