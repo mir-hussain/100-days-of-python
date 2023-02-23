@@ -16,8 +16,8 @@ class QuizInterface():
 
         self.score = Canvas(width=100, height=50,
                             bg=THEME_COLOR, highlightthickness=0)
-        self.score.create_text(50, 25, text="Score: ",
-                               font=("Aria", 18, "normal"), anchor="center")
+        self.score_count = self.score.create_text(50, 25, text="Score: ",
+                                                  font=("Aria", 18, "normal"), anchor="center")
         self.score.grid(row=1, column=1, padx=0)
 
         # * Que Card
@@ -45,13 +45,9 @@ class QuizInterface():
 
         self.true_button.grid(row=3, column=2, pady=20)
 
-        self.next_que()
+        self.get_next_question()
 
         self.window.mainloop()
-
-    def next_que(self):
-        q_text = self.quiz.next_question()
-        self.canvas.itemconfig(self.question, text=q_text)
 
     def true_pressed(self):
         self.give_feedback(self.quiz.check_answer("True"))
@@ -60,6 +56,9 @@ class QuizInterface():
         self.give_feedback(self.quiz.check_answer("False"))
 
     def get_next_question(self):
+        self.canvas.config(bg="white")
+        self.score.itemconfig(
+            self.score_count, text=f"Score: {self.quiz.score}")
         q_text = self.quiz.next_question()
         self.canvas.itemconfig(self.question, text=q_text)
 
