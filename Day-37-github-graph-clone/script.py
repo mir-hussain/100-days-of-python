@@ -54,11 +54,11 @@ def formatted_date():
 # print(res.text)
 
 
-pixel_params = {
-    "date": formatted_date(),
-    "quantity": "1"
-}
+# pixel_params = {
+#     "date": formatted_date(),
+#     "quantity": "1"
+# }
 
-res = requests.post(url=pixel_endpoint, json=pixel_params, headers=headers)
+# res = requests.post(url=pixel_endpoint, json=pixel_params, headers=headers)
 
-print(res.text)
+# print(res.text)
