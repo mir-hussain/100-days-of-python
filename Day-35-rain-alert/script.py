@@ -17,6 +17,25 @@ params = {
 }
 
 weather_req = requests.get(url=endpoint, params=params)
+weather_req.raise_for_status()
 
 weather_data = weather_req.json()
-print(weather_data)
+hour_list = weather_data["hourly"][:12]
+
+
+def check_for_rain():
+    rain: bool
+    for hour_info in hour_list:
+        if hour_info["weather"][0]["main"] == "Rain":
+            rain = True
+            break
+        else:
+            rain = False
+
+    return rain
+
+
+print(check_for_rain())
+
+
+# print(weather_data["hourly"][0]["weather"][0]["main"])
