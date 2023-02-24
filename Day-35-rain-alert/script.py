@@ -7,11 +7,9 @@ load_dotenv()
 
 MY_LAT = 23.777176
 MY_LONG = 90.399452
-EMAIL = os.getenv("email")
-PASSWORD = os.getenv("password")
+email = os.getenv("email")
+password = os.getenv("password")
 MAIL = ''
-print(EMAIL)
-print(PASSWORD)
 
 endpoint = "https://api.openweathermap.org/data/2.5/onecall"
 api_key = os.getenv("key")
@@ -47,13 +45,13 @@ else:
     MAIL = "Chill, no rain in next 12 hours"
 
 
-with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+with smtplib.SMTP(host="smtp.gmail.com", port=587) as connection:
     connection.starttls()
-    connection.login(user=EMAIL,
-                     password=PASSWORD)
+    connection.login(user=email,
+                     password=password)
     connection.sendmail(
-        from_addr=EMAIL,
-        to_addrs=EMAIL,
+        from_addr=email,
+        to_addrs=email,
         msg=f"Subject: Rain alert\n\n{MAIL}"
     )
     print(f"Mail send {MAIL}")
