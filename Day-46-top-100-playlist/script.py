@@ -10,6 +10,7 @@ pp = pprint.PrettyPrinter(depth=4)
 
 load_dotenv()
 
+
 client_id = os.getenv("client_id")
 client_secret = os.getenv("client_secret")
 redirect_uri = "http://example.com"
@@ -22,7 +23,7 @@ user_id = sp.current_user()["id"]
 
 date = input("Enter the year you wanna travel to in this format YYYY-MM-DD ")
 year = date.split("-")[0]
-
+print("Lading...")
 
 res = requests.get(f"https://www.billboard.com/charts/hot-100/{date}/")
 res.raise_for_status()
@@ -45,4 +46,11 @@ for title in title_list:
     except IndexError:
         print(f"{title} Doesn't Exist on Spotify. Skipped")
 
-sp.playlist()
+print(song_uris)
+
+playlist = sp.user_playlist_create(
+    user=user_id, name=f"{date} Top 100", public=False)
+
+sp.playlist_add_items(playlist_id=playlist["id"], items=song_uris)
+
+print("Done")
