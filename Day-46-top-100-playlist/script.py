@@ -46,8 +46,6 @@ for title in title_list:
     except IndexError:
         print(f"{title} Doesn't Exist on Spotify. Skipped")
 
-print(song_uris)
-
 playlist = sp.user_playlist_create(
     user=user_id, name=f"{date} Top 100", public=False)
 
