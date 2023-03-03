@@ -12,4 +12,7 @@ res.raise_for_status()
 
 
 soup = BeautifulSoup(res.text, "html.parser")
-print(soup)
+
+price = int(
+    soup.find(class_="a-price-whole").get_text(strip=True).replace(".", ""))
+print(price)
