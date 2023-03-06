@@ -3,6 +3,7 @@ import threading
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+
 chrome_driver_path = "C:\Development\chromedriver.exe"
 
 driver = webdriver.Chrome(executable_path=chrome_driver_path)
@@ -20,8 +21,6 @@ def check_store():
     for item in store:
         class_name = item.get_attribute("class")
 
-        print(class_name)
-
         if class_name == '':
             items_to_buy.append(item)
 
@@ -33,6 +32,14 @@ def check_store():
 
 check_store()
 
+timeout = time.time() + 60*5
 
 while True:
+
+    if time.time() > timeout:
+        rate = driver.find_element(By.ID, "cps").text.split()[-1]
+        print(rate)
+        driver.quit()
+        break
+
     cookie.click()
