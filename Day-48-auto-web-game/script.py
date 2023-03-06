@@ -1,6 +1,7 @@
+import time
+import threading
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
 
 chrome_driver_path = "C:\Development\chromedriver.exe"
 
@@ -15,10 +16,22 @@ cookie = driver.find_element(By.ID, "cookie")
 def check_store():
     store = driver.find_elements(By.CSS_SELECTOR, "#store div")
 
+    items_to_buy = []
     for item in store:
-        item_block = item.find_element(By.TAG_NAME, "b")
+        class_name = item.get_attribute("class")
 
-        print(item.get_attribute("class"))
+        print(class_name)
+
+        if class_name == '':
+            items_to_buy.append(item)
+
+    if not len(items_to_buy) == 0:
+        items_to_buy[-1].click()
+
+    threading.Timer(5.0, check_store).start()
+
+
+check_store()
 
 
 while True:
