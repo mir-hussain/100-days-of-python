@@ -21,11 +21,15 @@ driver.get("https://www.linkedin.com/")
 username_el = driver.find_element(By.NAME, "session_key")
 username_el.send_keys(email)
 
-time.sleep(2)
+time.sleep(1)
 
 password_el = driver.find_element(By.NAME, "session_password")
 password_el.send_keys(password)
 
+time.sleep(1)
+
+driver.find_element(
+    By.XPATH, '//*[@id="main-content"]/section[1]/div/form[1]/div[2]/button').click()
 
 while True:
     pass
