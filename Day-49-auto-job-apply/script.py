@@ -9,9 +9,6 @@ load_dotenv()
 email = os.getenv("email")
 password = os.getenv("password")
 
-print(email)
-print(password)
-
 chrome_driver_path = "c:\Development\chromedriver.exe"
 
 driver = webdriver.Chrome(executable_path=chrome_driver_path)
@@ -33,6 +30,12 @@ time.sleep(2)
 
 driver.get("https://www.linkedin.com/jobs/search/?f_LF=f_AL&geoId=102257491&keywords=python%20developer&location=London%2C%20England%2C%20United%20Kingdom&redirect=false&position=1&pageNum=0")
 
+time.sleep(2)
+
+job_list = driver.find_element(
+    By.XPATH, '/html/body/div[5]/div[3]/div[4]/div/div/main/div/section[1]/div/ul').find_elements(By.TAG_NAME, "li")
+
+print(job_list)
 
 while True:
     pass
