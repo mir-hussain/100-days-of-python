@@ -30,12 +30,17 @@ time.sleep(2)
 
 driver.get("https://www.linkedin.com/jobs/search/?f_LF=f_AL&geoId=102257491&keywords=python%20developer&location=London%2C%20England%2C%20United%20Kingdom&redirect=false&position=1&pageNum=0")
 
-time.sleep(2)
+time.sleep(5)
 
 job_list = driver.find_element(
-    By.XPATH, '/html/body/div[5]/div[3]/div[4]/div/div/main/div/section[1]/div/ul').find_elements(By.TAG_NAME, "li")
+    By.XPATH, '/html/body/div[5]/div[3]/div[4]/div/div/main/div/section[1]/div/ul').find_elements(By.CLASS_NAME, "job-card-container")
 
-print(job_list)
+print(len(job_list))
+
+for job in job_list:
+    time.sleep(5)
+    job.click()
+    print("clicked")
 
 while True:
     pass
