@@ -37,14 +37,25 @@ job_list_container = driver.find_element(
     By.XPATH, '/html/body/div[5]/div[3]/div[4]/div/div/main/div/section[1]/div/ul')
 
 driver.execute_script(
-    'document.getElementsByClassName("jobs-search-results-list")[0].scroll(0, 4000)')
+    'document.getElementsByClassName("jobs-search-results-list")[0].scroll(0, 5000)')
 
-# print(len(job_list))
+time.sleep(10)
 
-# for job in job_list:
-#     time.sleep(5)
-#     job.click()
-#     print("clicked")
+job_list = job_list_container.find_elements(
+    By.CLASS_NAME, "job-card-container")
+
+print("Job found")
+print(len(job_list))
+
+for i, job in enumerate(job_list):
+    job.click()
+    time.sleep(2)
+
+    save_button = driver.find_element(By.CLASS_NAME, "jobs-save-button")
+
+    if save_button.find_element(By.TAG_NAME, "span").text == "Save":
+        save_button.click()
+        print(f"clicked {i}")
 
 while True:
     pass
