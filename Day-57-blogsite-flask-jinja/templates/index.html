@@ -19,7 +19,7 @@
         <div class="card">
           <h2>{{ post["title"] }}</h2>
           <p class="text">{{ post["subtitle"] }}</p>
-          <a href="#">Read</a>
+          <a href="{{ url_for('get_post', index=post['id']) }}">Read</a>
         </div>
       </div>
       {% endfor %}
